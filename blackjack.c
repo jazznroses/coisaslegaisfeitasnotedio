@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
+
 int calcular_valor(int indice_carta)
 {
     if (indice_carta == 0)
@@ -29,18 +31,21 @@ int main()
         {"🃑", "🃒", "🃓", "🃔", "🃕", "🃖", "🃗", "🃘", "🃙", "🃚", "🃛", "🃝", "🃞"}  // Paus
     };
 
+    int naipes_sorteados[3];
+    int cartas_sorteadas[3];
+
     srand(time(NULL));
 
-    int naipe1 = rand() % 4;
-    int carta1 = rand() % 13;
+    naipes_sorteados[0] = rand() % 4;
+    cartas_sorteadas[0] = rand() % 13;
 
-    int naipe2 = rand() % 4;
-    int carta2 = rand() % 13;
+    naipes_sorteados[1] = rand() % 4;
+    cartas_sorteadas[1] = rand() % 13;
 
-    while (naipe1 == naipe2 && carta1 == carta2)
+    while (naipes_sorteados[1] == naipes_sorteados[0] && cartas_sorteadas[1] == cartas_sorteadas[0])
     {
-        naipe2 = rand() % 4;
-        carta2 = rand() % 13;
+        naipes_sorteados[1] = rand() % 4;
+        cartas_sorteadas[1] = rand() % 13;
     }
 
     printf("\n --- BLACKJACK --- \n");
@@ -48,10 +53,14 @@ int main()
     fflush(stdout);
 
     sleep(5);
-    total_pontos += calcular_valor(carta1);
-    total_pontos += calcular_valor(carta2);
 
-    printf("\n Suas cartas aleatórias: %s  %s\n", baralho[naipe1][carta1], baralho[naipe2][carta2]);
+    total_pontos += calcular_valor(cartas_sorteadas[0]);
+    total_pontos += calcular_valor(cartas_sorteadas[1]);
+
+    printf("\n Suas cartas aleatórias: %s  %s\n",
+           baralho[naipes_sorteados[0]][cartas_sorteadas[0]],
+           baralho[naipes_sorteados[1]][cartas_sorteadas[1]]);
+
     printf(" Pontuação atual: %d pontos\n", total_pontos);
 
     if (total_pontos == 21)
@@ -65,17 +74,18 @@ int main()
 
     if (chose == 0)
     {
-        int naipe3 = rand() % 4;
-        int carta3 = rand() % 13;
+        naipes_sorteados[2] = rand() % 4;
+        cartas_sorteadas[2] = rand() % 13;
 
-        while ((naipe3 == naipe1 && carta3 == carta1) || (naipe3 == naipe2 && carta3 == carta2))
+        while ((naipes_sorteados[2] == naipes_sorteados[0] && cartas_sorteadas[2] == cartas_sorteadas[0]) ||
+               (naipes_sorteados[2] == naipes_sorteados[1] && cartas_sorteadas[2] == cartas_sorteadas[1]))
         {
-            naipe3 = rand() % 4;
-            carta3 = rand() % 13;
+            naipes_sorteados[2] = rand() % 4;
+            cartas_sorteadas[2] = rand() % 13;
         }
 
-        total_pontos += calcular_valor(carta3);
-        printf("\n Sua carta comprada: %s \n", baralho[naipe3][carta3]);
+        total_pontos += calcular_valor(cartas_sorteadas[2]);
+        printf("\n Sua carta comprada: %s \n", baralho[naipes_sorteados[2]][cartas_sorteadas[2]]);
         printf(" Pontuação total: %d pontos\n", total_pontos);
     }
 
