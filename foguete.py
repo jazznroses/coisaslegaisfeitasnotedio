@@ -177,7 +177,7 @@ def add_graph_point():
 
 
 def draw_ui():
-    # multiplicador
+    
     mult_color = GREEN if not crashed else RED
 
     text = font_big.render(f"{multiplier:.2f}x", True, mult_color)
@@ -265,7 +265,7 @@ while True:
 
     draw_ui()
 
-    # mensagens
+    
     if crashed:
         msg = font_big.render("CRASHOU!", True, RED)
         screen.blit(msg, (450, 280))
