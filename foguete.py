@@ -102,7 +102,7 @@ def draw_graph():
 
 
 def draw_rocket(x, y):
-    # fogo
+    
     pygame.draw.polygon(screen, (255, 120, 0), [
         (x - 10, y + 20),
         (x + 10, y + 20),
@@ -112,28 +112,28 @@ def draw_rocket(x, y):
    
     pygame.draw.rect(screen, WHITE, (x - 15, y - 20, 30, 50), border_radius=10)
 
-    # ponta
+   
     pygame.draw.polygon(screen, RED, [
         (x - 15, y - 20),
         (x + 15, y - 20),
         (x, y - 45)
     ])
 
-    # asa esquerda
+    
     pygame.draw.polygon(screen, BLUE, [
         (x - 15, y + 10),
         (x - 30, y + 30),
         (x - 15, y + 30)
     ])
 
-    # asa direita
+    
     pygame.draw.polygon(screen, BLUE, [
         (x + 15, y + 10),
         (x + 30, y + 30),
         (x + 15, y + 30)
     ])
 
-    # janela
+   
     pygame.draw.circle(screen, BLUE, (x, y), 7)
 
 
